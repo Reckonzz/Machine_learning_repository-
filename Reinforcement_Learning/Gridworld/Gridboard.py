@@ -100,6 +100,13 @@ class Board:
         if self.checkMove(pos): 
             self.components["Player"][0].addPos(pos)
 
-       
-        
+    def board_to_matrix(self): 
+        piece_names = list(self.components.keys())
+        piece_names.remove("All") 
+        np_board = np.zeros((len(piece_names), self.size, self.size))
+        for i, name in enumerate(piece_names): 
+            for piece in self.components[name]: 
+                x, y = piece.pos
+                np_board[i, y, x] = 1 
+        return np_board
     
